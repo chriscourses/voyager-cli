@@ -1,11 +1,18 @@
 {
-  "name": "voyager-cli",
-  "version": "0.1.0",
-  "description": "A Command Line Interface (CLI) for generating Voyager apps.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Chris Courses",
-  "license": "MIT"
+    "name": "voyager-cli",
+    "version": "0.1.0",
+    "description": "A Command Line Interface (CLI) for generating Voyager apps.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+        "voyager": "./bin/voyager.js"
+    },
+    "author": "Chris Courses",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.3.0",
+        "commander": "chriscourses/commander.js"
+    }
 }

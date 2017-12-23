@@ -17,6 +17,7 @@ module.exports = {
         module: true,
         require: true,
         __dirname: true,
-        process: true
+        process: true,
+        console: true
     }
 }
