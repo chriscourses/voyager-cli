@@ -25,7 +25,7 @@ program.version(require('../package').version).usage('<command> [options]')
 program
     .command('new <project-name>')
     .description('create new project')
-    .option('-a, --auth', 'scaffold with user authentication integrated')
+    .option('-a, --auth', 'scaffold with user authentication')
     .action((projectName, options) => {
         spinner.start()
 
