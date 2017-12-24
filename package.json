@@ -13,6 +13,8 @@
     "license": "MIT",
     "dependencies": {
         "chalk": "^2.3.0",
-        "commander": "chriscourses/commander.js"
+        "commander": "chriscourses/commander.js",
+        "download-git-repo": "^1.0.1",
+        "ora": "^1.3.0"
     }
 }

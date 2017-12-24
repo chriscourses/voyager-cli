@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 
 const program = require('commander')
+const download = require('download-git-repo')
+const fs = require('fs')
+const logger = require('../lib/logger')
 const chalk = require('chalk')
+const ora = require('ora')
+
 const header = chalk.bold.hex('#3E4FD7')
 const command = chalk.bold.hex('#FBE255')
-// const arg1 = process.argv[2]
-// const arg2 = process.argv[3]
+const spinner = ora('preparing for liftoff')
 
 /**
  * commander initialization
@@ -14,17 +18,31 @@ const command = chalk.bold.hex('#FBE255')
 program.version(require('../package').version).usage('<command> [options]')
 
 /**
- * voyager new [project]
+ * voyager new <project-name>
  */
 
 program
     .command('new <project-name>')
     .description('create new project')
     .option('-a, --auth', 'scaffold with user authentication integrated')
-    .action((project, options) => {
-        const mode = options.setup_mode || 'normal'
-        project = project || 'all'
-        console.log('setup for %s project(s) with %s mode', project, mode)
+    .action((projectName, options) => {
+        spinner.start()
+
+        let repo = options.auth ? 'voyager-auth' : 'voyager'
+
+        if (fs.existsSync(projectName)) {
+            spinner.stop()
+            logger.fatal('Directory already exists.')
+        }
+
+        fs.mkdirSync(projectName)
+
+        download(`chriscourses/${repo}`, projectName, err => {
+            spinner.stop()
+            if (err) logger.fatal(err)
+
+            logger.success('Created new Voyager project: "%s".', projectName)
+        })
     })
 
 /**
@@ -35,28 +53,26 @@ program
     .command('start')
     .description('launch project')
     .option('-s, --setup_mode [mode]', 'Which setup mode to use')
-    .action((project, options) => {
-        const mode = options.setup_mode || 'normal'
-        project = project || 'all'
-        console.log('setup for %s project(s) with %s mode', project, mode)
-    })
+    .action((project, options) => {})
+
+/**
+ * custom help section                 
+ */
 
 program.on('--help', function() {
-    console.log('')
-    console.log('')
-    console.log(header('  Examples:'))
-    console.log('')
+    console.log(`\n\n${header('  Examples:')}`)
     console.log(
-        command('    voyager new app --auth') +
-            chalk.gray('  creates a new user auth app')
+        '\n' +
+            command('    voyager new app --auth') +
+            chalk.gray('  creates a new app with user auth ')
     )
     console.log(
         command('    voyager start') +
-            chalk.gray('           starts the voyager server')
+            chalk.gray('           starts up the voyager server') +
+            '\n'
     )
-    console.log('')
 })
 
 program.parse(process.argv)
 
-if (program.args.length === 0) program.help()
+if (program.args.length === 0) program.help() // Show help section if only "voyager" is typed
