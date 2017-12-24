@@ -6,10 +6,11 @@ const fs = require('fs')
 const logger = require('../lib/logger')
 const chalk = require('chalk')
 const ora = require('ora')
+const di = require('dependency-install')
 
 const header = chalk.bold.hex('#3E4FD7')
 const command = chalk.bold.hex('#FBE255')
-const spinner = ora('preparing for liftoff')
+const spinner = ora('Preparing for liftoff (initializing project)')
 
 /**
  * commander initialization
@@ -38,10 +39,24 @@ program
         fs.mkdirSync(projectName)
 
         download(`chriscourses/${repo}`, projectName, err => {
-            spinner.stop()
-            if (err) logger.fatal(err)
+            if (err) {
+                spinner.stop()
+                logger.fatal(err)
+            }
 
-            logger.success('Created new Voyager project: "%s".', projectName)
+            spinner.succeed()
+
+            spinner.text = 'Downloading Voyager dependencies'
+            spinner.color = 'blue'
+            spinner.start()
+
+            di.install(['./'], function() {
+                spinner.stop()
+                logger.success(
+                    'Created new Voyager project: "%s".',
+                    projectName
+                )
+            })
         })
     })
 
