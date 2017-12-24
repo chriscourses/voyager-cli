@@ -1,23 +1,42 @@
 <p align="center"><img src="http://chriscourses.com/images/cc-voyager.svg"></p>
 
-## About Voyager CLI
+## voyager-cli
 
-A Command Line Interface (CLI) for generating Voyager apps.
+A command line interface (CLI) for generating [Voyager](https://github.com/chriscourses/voyager) apps.
+
+**Installation**
+
+To gain access to the `voyager` executable, install the voyager-cli globally with the following:
 
 ``` bash
 $ npm install -g voyager-cli
 ```
 
-### Usage
+## Usage
 
 ``` bash
-$ voyager new <project-name>
+$ voyager <command> [options]
 ```
 
-Example:
+**Commands:**
 
 ``` bash
-$ voyager new app
+$ voyager new [options] <project-name>  # create new project
+$ voyager start [options]               # launch project
+```
+
+**Options:**
+
+``` bash
+-V, --version  # output the version number
+-h, --help     # output usage information
+```
+
+**Examples:**
+
+``` bash
+$ voyager new app --auth  # creates a new app with user auth 
+$ voyager start           # starts up the voyager server
 ```
 
 
