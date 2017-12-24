@@ -12,14 +12,13 @@ module.exports = {
         'linebreak-style': ['error', 'unix'],
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
-        rules: {
-            'no-console': 0
-        }
+        'no-console': 0
     },
     globals: {
         module: true,
         require: true,
         __dirname: true,
-        process: true
+        process: true,
+        console: true
     }
 }

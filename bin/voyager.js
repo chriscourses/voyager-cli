@@ -46,7 +46,7 @@ program
 
             spinner.succeed()
 
-            spinner.text = 'Downloading Voyager dependencies'
+            spinner.text = `Downloading dependencies (this'll take a few seconds)`
             spinner.color = 'blue'
             spinner.start()
 
@@ -68,7 +68,10 @@ program
     .command('start')
     .description('launch project')
     .option('-s, --setup_mode [mode]', 'Which setup mode to use')
-    .action((project, options) => {})
+    .action(() => {
+        const exec = require('child_process').exec
+        exec('npm start').stderr.pipe(process.stderr)
+    })
 
 /**
  * custom help section                 
