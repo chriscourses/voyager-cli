@@ -1,7 +1,7 @@
 module.exports = {
     env: {
         browser: false,
-        es6: true
+        es6: false
     },
     extends: 'eslint:recommended',
     parserOptions: {
@@ -19,6 +19,9 @@ module.exports = {
         require: true,
         __dirname: true,
         process: true,
-        console: true
+        console: true,
+        describe: true,
+        it: true,
+        exports: true
     }
 }
