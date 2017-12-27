@@ -2,11 +2,12 @@
 
 const program = require('commander')
 const chalk = require('chalk')
+const childProcess = require('child_process')
+const shell = require('shelljs')
 const generate = require('../lib/generate')
 
 const header = chalk.bold.hex('#3E4FD7')
 const command = chalk.bold.hex('#FBE255')
-console.log(generate)
 
 /**
  * commander initialization
@@ -31,10 +32,8 @@ program
 program
     .command('start')
     .description('launch project')
-    .option('-s, --setup_mode [mode]', 'Which setup mode to use')
     .action(() => {
-        const exec = require('child_process').exec
-        exec('npm start').stderr.pipe(process.stderr)
+        shell.exec('npm start')
     })
 
 /**

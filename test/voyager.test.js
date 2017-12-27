@@ -1,13 +1,14 @@
 const { expect } = require('chai')
 const fs = require('fs')
 const rm = require('rimraf').sync
+
 const generate = require('../lib/generate')
 
 describe('running `voyager new app`', function() {
     this.timeout(15000)
 
     it('should create a voyager app', function(done) {
-        const directoryPath = './test/mock-app'
+        const directoryPath = './test/test-app'
         const options = {
             auth: false
         }
@@ -29,7 +30,7 @@ describe('running `voyager new app --auth`', function() {
     this.timeout(15000)
 
     it('should create a voyager-auth app', function(done) {
-        const directoryPath = './test/mock-app-auth'
+        const directoryPath = './test/test-app-auth'
         const options = {
             auth: true
         }
@@ -46,3 +47,4 @@ describe('running `voyager new app --auth`', function() {
         })
     })
 })
+
