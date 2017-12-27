@@ -2,7 +2,6 @@
 
 const program = require('commander')
 const chalk = require('chalk')
-const childProcess = require('child_process')
 const shell = require('shelljs')
 const generate = require('../lib/generate')
 
